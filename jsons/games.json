@@ -1,0 +1,34 @@
+{
+  "games": [
+    {
+      "name": "FIFA 20",
+      "category": "simulator",
+      "price": "40",
+      "image": "https://upload.wikimedia.org/wikipedia/en/thumb/2/21/FIFA_20_Standard_Edition_Cover.jpg/220px-FIFA_20_Standard_Edition_Cover.jpg"
+    },
+    {
+      "name": "God of War",
+      "category": "adventure",
+      "price": "30",
+      "image": "https://vignette.wikia.nocookie.net/godofwar/images/a/a7/God_of_War_4_cover.jpg/revision/latest/top-crop/width/360/height/360?cb=20170614023116"
+    },
+    {
+      "name": "GTA V",
+      "category": "action",
+      "price": "50",
+      "image": "https://vignette.wikia.nocookie.net/gtawiki/images/0/0c/OneTrueSlash.jpg/revision/latest/scale-to-width-down/340?cb=20140116163503"
+    },
+    {
+      "name": "Uncharted 4",
+      "category": "FPS",
+      "price": "20",
+      "image": "https://media.gamestop.com/i/gamestop/10116405/UNCHARTED-4-A-Thiefs-End"
+    },
+    {
+      "name": "F1 2020",
+      "category": "simulator",
+      "price": "25",
+      "image": "https://i.imgur.com/xODromS.png"
+    }
+  ]
+}
