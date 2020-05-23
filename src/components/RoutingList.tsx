@@ -1,20 +1,29 @@
 import React from "react";
 import Notfound from './NotFound';
-import { Route, Link, BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { ROUTING } from '../constants/routing'
+import '../css/routinglist.css'
+import logo from '../logo.jpg'
 
 const RoutingList = () => {
     return (
         <Router>
-            <div>
-                {ROUTING.map(routeItem => (
-                    <div key={routeItem.linkTo}>
-                        <Link to={routeItem.linkTo}>
-                            <button type="button">{routeItem.buttonName}</button>
-                        </Link>
-                    </div>
-                ))}
-
+            <div className={"content"}>
+                <header>
+                    <h4 className={'logo'}>E-commerce webshop</h4>
+                    <nav>
+                        <ul className={'nav-links'}>
+                            {ROUTING.map(routeItem => (
+                                <li key={routeItem.linkTo}>
+                                    <Link to={routeItem.linkTo}>
+                                        {routeItem.buttonName}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+                    <button>Contact</button>
+                </header>
                 <Switch>
                     {ROUTING.map(routeItem => (
                         <Route
@@ -24,7 +33,7 @@ const RoutingList = () => {
                             component={routeItem.component}
                         />
                     ))}
-                    <Route component={Notfound} />
+                    <Route component={Notfound}/>
                 </Switch>
             </div>
         </Router>
