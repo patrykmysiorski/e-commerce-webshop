@@ -1,6 +1,7 @@
 import App from "../components/App";
 import LandingPage from "../components/LandingPage";
 import Products from "../components/Products";
+import Cart from "../components/Cart";
 
 export const ROUTING = [
     {
@@ -17,5 +18,10 @@ export const ROUTING = [
         linkTo: "/products",
         buttonName: "Products",
         component: Products
+    },
+    {
+        linkTo: "/cart",
+        buttonName: "Your Cart",
+        component: Cart
     }
 ];
