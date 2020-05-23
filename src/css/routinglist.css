@@ -8,6 +8,7 @@ header {
     align-items: center;
     padding: 30px 10%;
     background-color: #191c21;
+    color: white;
 }
 
 .logo {
@@ -16,15 +17,18 @@ header {
 
 .nav-links {
     link-style: none;
+    color: white;
 }
 
 .nav-links li {
     display: inline-block;
     padding: 0px 20px;
+    color: white;
 }
 
 .nav-links li a {
     transition: all 0.3s ease 0s;
+    color: white;
 }
 
 .nav-links li a:hover {
@@ -38,8 +42,10 @@ button {
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease 0s;;
+    color: white;
 }
 
 button:hover {
     background-color: rgba(0, 136, 169, 0.8);
+    color: white;
 }
