@@ -1,18 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import NavBar from "./components/NavBar";
-import {Provider} from "react-redux";
-import rootReducer from './configureStore'
+import { Provider } from "react-redux";
+import { render } from 'react-dom'
+import configureStore from "./configureStore";
+import RoutingList from "./components/RoutingList";
 
-export const store = rootReducer();
+const store = configureStore()
 
-ReactDOM.render(
+render(
     <Provider store={store}>
-        <React.StrictMode>
-            <NavBar/>
-        </React.StrictMode>,
+        <RoutingList />
     </Provider>,
     document.getElementById('root')
-);
+)
+
