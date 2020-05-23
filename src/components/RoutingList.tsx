@@ -10,7 +10,7 @@ const RoutingList = () => {
         <Router>
             <div className={"content"}>
                 <header>
-                    <img src={logo} width={"50px"} height={'50px'} alt={'logo'}/>
+                    <h4 className={'logo'}>E-commerce webshop</h4>
                     <nav>
                         <ul className={'nav-links'}>
                             {ROUTING.map(routeItem => (
