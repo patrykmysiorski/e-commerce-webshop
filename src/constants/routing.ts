@@ -2,6 +2,7 @@ import App from "../components/App";
 import LandingPage from "../components/LandingPage";
 import Products from "../components/Products";
 import Cart from "../components/Cart";
+import Dashboard from "../components/admin/Dashboard";
 
 export const ROUTING = [
     {
@@ -23,5 +24,10 @@ export const ROUTING = [
         linkTo: "/cart",
         buttonName: "Your Cart",
         component: Cart
+    },
+    {
+        linkTo: "/admin_dashboard",
+        buttonName: "Dashboard",
+        component: Dashboard
     }
 ];
