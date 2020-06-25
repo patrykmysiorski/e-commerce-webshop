@@ -2,7 +2,7 @@ import {
     CartState,
     CartActionTypes,
     ADD_TO_CART,
-} from '../types/types'
+} from '../types/cartTypes'
 
 const initialState: CartState = {
     cart: []
