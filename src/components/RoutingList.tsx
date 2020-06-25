@@ -2,7 +2,7 @@ import React from "react";
 import Notfound from './NotFound';
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { ROUTING } from '../constants/routing'
-import '../css/routinglist.css'
+import '../css/routingList.css'
 
 const RoutingList = () => {
     return (
