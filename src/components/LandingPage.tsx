@@ -1,6 +1,9 @@
 import React from 'react'
+import '../css/standardFont.css'
 
 const LandingPage: React.FC = () =>
-    <h4>Landing Page works!</h4>
+    <div className={"font-white"}>
+        <h1>Landing Page works!</h1>
+    </div>
 
 export default LandingPage;
