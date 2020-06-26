@@ -35,7 +35,7 @@ const RoutingList = () => {
                             ))}
                         </ul>
                     </nav>
-                    <button>Contact</button>
+                    <button className={'contact-button'}>Contact</button>
                 </header>
                 <Switch>
                     {ROUTING.map(routeItem => (
