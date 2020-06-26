@@ -10,7 +10,7 @@ const Menu: React.FC = () =>
             <div className="flex-container">
                 {ADMIN_ROUTING.map(routeItem => {
                     return (
-                        <div className={"margin"}>
+                        <div className={"margin"} key={routeItem.linkTo}>
                             <Link to={routeItem.linkTo}>
                                 <button>
                                     <span>{routeItem.buttonName}</span>
