@@ -17,3 +17,50 @@ html, body {
   color: white;
 }
 
+.flex-container-page {
+  color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 30px auto;
+}
+
+.flex-container-page-column {
+  color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 30px auto;
+  flex-direction: column;
+}
+
+.delete-button {
+  padding: 9px 15px;
+  background-color: #c0392b;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;;
+  color: white;
+}
+
+.button {
+  padding: 9px 25px;
+  background-color: rgba(0, 136, 169, 1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;;
+  color: white;
+  margin-top: 15px;
+  margin-right: 10px;
+}
+
+.button:hover {
+  background-color: rgba(0, 136, 169, 0.8);
+  color: white;
+}

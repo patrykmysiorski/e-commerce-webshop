@@ -59,12 +59,12 @@ const AddProductForm: React.FC = (props: any) => {
                 </div>
 
                 <div>
-                    <button type="submit"
+                    <button className={'button'} type="submit"
                         // disabled={pristine || submitting}
                     >
                         Add product!
                     </button>
-                    <button type="button" disabled={pristine || submitting} onClick={reset}>
+                    <button className={'button'} type="button" disabled={pristine || submitting} onClick={reset}>
                         Clear Values
                     </button>
                 </div>
@@ -80,13 +80,7 @@ const mapStateToProps = (state: any) => {
 };
 
 const withRedux = reduxForm({
-    form: 'addProduct',
-    initialValues: {
-        price: 15,
-        title: 'fifa',
-        category: 'sport',
-        thumbnail: 'https://images.morele.net/i1064/6315778_0_i1064.jpg'
-    }
+    form: 'addProduct'
 })(AddProductForm);
 
 export default connect(mapStateToProps)(withRedux)

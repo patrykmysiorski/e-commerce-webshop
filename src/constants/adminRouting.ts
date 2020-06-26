@@ -1,4 +1,3 @@
-import App from "../components/App";
 import Dashboard from "../components/admin/Dashboard";
 import Orders from "../components/admin/Orders"
 import Products from "../components/admin/Products";

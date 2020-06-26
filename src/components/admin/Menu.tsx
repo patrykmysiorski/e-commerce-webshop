@@ -12,7 +12,7 @@ const Menu: React.FC = () =>
                     return (
                         <div className={"margin"} key={routeItem.linkTo}>
                             <Link to={routeItem.linkTo}>
-                                <button>
+                                <button className={'button'}>
                                     <span>{routeItem.buttonName}</span>
                                 </button>
                             </Link>

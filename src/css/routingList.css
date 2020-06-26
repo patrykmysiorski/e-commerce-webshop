@@ -35,7 +35,7 @@ header {
     color: #0088a9;
 }
 
-button {
+.contact-button {
     padding: 9px 25px;
     background-color: rgba(0, 136, 169, 1);
     border: none;
@@ -45,7 +45,7 @@ button {
     color: white;
 }
 
-button:hover {
+.contact-button:hover {
     background-color: rgba(0, 136, 169, 0.8);
     color: white;
 }

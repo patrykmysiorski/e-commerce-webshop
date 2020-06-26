@@ -1,121 +1,137 @@
-import React, { useState } from 'react';
-import { useSelector } from "react-redux";
-import { RootState } from "../reducers";
-import { reduxForm } from 'redux-form'
+import React from 'react';
+import { useSelector, connect } from "react-redux";
+import { Field, getFormValues, reduxForm } from 'redux-form'
 import '../css/cart.css'
+import { Product } from "../types/productsTypes";
+import renderField from "./renderField";
+import { required, email, length } from 'redux-form-validators'
 
 const Cart: React.FC = (props: any) => {
-    const items: any = useSelector<RootState>(state => state.cartReducer.cart)
+    const products: Product[] = useSelector((state: any) => state.cartReducer.cart)
     const {pristine, reset, submitting} = props
-    const [cartValue, setCartValue] = useState(0);
-
+    let cartValue: number = 0;
     const handleSubmit = (event: any) => {
         console.log(event)
         event.preventDefault();
     }
 
-    const testObject: any = {"id": 245, "title": "fifa", "price": 20, "category": "game", "thumbnail": "https://wp.pl"};
     return (
-        <div className="center">
-            {items.map((listItem: any) =>
-                <div key={listItem.id}>
-                    {listItem.name}{' '}
-                    {listItem.price}
-                </div>
-            )}
+        <div className="flex-container-page-column">
+            {products.length > 0 ? <>
+                <table className={'cart'}>
+                    <thead>
+                    <tr>
+                        <th>TITLE</th>
+                        <th>PRICE</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {products.map((product: Product) => {
+                        cartValue = product.price + cartValue;
+                        return (
+                            <tr key={product.id}>
+                                <td>{product.title}</td>
+                                <td>{product.price} EUR</td>
+                            </tr>
+                        )
+                    })}
+                    </tbody>
+                </table>
+                <div>Total price: {cartValue} EUR</div>
+            </> : <h2>Your cart is empty! :(</h2>}
+
             <div className={'form'}>
-                <>
-                    {/*<form onSubmit={handleSubmit}>*/}
-                    {/*    <div>*/}
-                    {/*        <label>First Name</label>*/}
-                    {/*        <div>*/}
-                    {/*            <Field*/}
-                    {/*                name="firstName"*/}
-                    {/*                component="input"*/}
-                    {/*                type="text"*/}
-                    {/*                placeholder="First Name"*/}
-                    {/*            />*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*    <div>*/}
-                    {/*        <label>Last Name</label>*/}
-                    {/*        <div>*/}
-
-                    {/*            <Field*/}
-                    {/*                name="lastName"*/}
-                    {/*                component="input"*/}
-                    {/*                type="text"*/}
-                    {/*                placeholder="Last Name"*/}
-                    {/*            />*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*    <div>*/}
-                    {/*        <label>Email</label>*/}
-                    {/*        <div>*/}
-                    {/*            <Field*/}
-                    {/*                name="email"*/}
-                    {/*                component="input"*/}
-                    {/*                type="email"*/}
-                    {/*                placeholder="Email"*/}
-                    {/*            />*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*    <div>*/}
-                    {/*        <label>Phone</label>*/}
-                    {/*        <div>*/}
-                    {/*            <Field*/}
-                    {/*                name="phone"*/}
-                    {/*                component="input"*/}
-                    {/*                type="text"*/}
-                    {/*                placeholder="Phone number"*/}
-                    {/*            />*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*    <div>*/}
-                    {/*        <label>Accept condition</label>*/}
-                    {/*        <div>*/}
-                    {/*            <Field*/}
-                    {/*                name="consent"*/}
-                    {/*                id="consent"*/}
-                    {/*                component="input"*/}
-                    {/*                type="checkbox"*/}
-                    {/*            />*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*    <div>*/}
-                    {/*        <label>Notes</label>*/}
-                    {/*        <div>*/}
-                    {/*            <Field name="notes" component="textarea"/>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*    <div>*/}
-                    {/*        <button type="submit" disabled={pristine || submitting}>*/}
-                    {/*            Submit*/}
-                    {/*        </button>*/}
-                    {/*        <button type="button" disabled={pristine || submitting} onClick={reset}>*/}
-                    {/*            Clear Values*/}
-                    {/*        </button>*/}
-                    {/*    </div>*/}
-                    {/*</form>*/}
-                </>
                 <form action={'http://www.jakubadamus.cba.pl/paypal.php'} method={'get'}>
-                    <input type={'text'} name={'firstName'} id={''} placeholder={'Name'}/>
-                    <input type={'text'} name={'lastName'} id={''} placeholder={'Surname'}/>
-                    <input type={'text'} name={'email'} id={''} placeholder={'example@example.com'}/>
-                    <input type={'text'} name={'phone'} id={''} placeholder={'telephone'}/>
-                    <input type={'checkbox'} name={'agreement'} id={''}/>
+                    <div>
+                        <label>First Name</label>
+                        <div>
+                            <Field
+                                name="firstName"
+                                component={renderField}
+                                type="text"
+                                placeholder="First Name"
+                                validate={length({ min: 3 })}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <label>Last Name</label>
+                        <div>
 
-                    <input type={'hidden'} name={'products[]'} value={testObject}/>
-                    <button type={'submit'}/>
+                            <Field
+                                name="lastName"
+                                component={renderField}
+                                type="text"
+                                placeholder="Last Name"
+                                validate={length({ min: 3 })}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <div>
+                            <Field
+                                name="email"
+                                component={renderField}
+                                type="email"
+                                placeholder="Email"
+                                validate={[required(), email()]}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <label>Phone</label>
+                        <div>
+                            <Field
+                                name="phone"
+                                component={renderField}
+                                type="text"
+                                placeholder="Phone number"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <label>Accept condition</label>
+                        <div>
+                            <Field
+                                name="consent"
+                                id="consent"
+                                component={renderField}
+                                type="checkbox"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <label>Notes</label>
+                        <div>
+                            <Field name="notes" component="textarea"/>
+                        </div>
+                    </div>
+                    <div>
+                        <button className={'button'} type="submit" disabled={ props.consent || pristine || submitting}>
+                            Submit
+                        </button>
+                        <button className={'button'} type="button" disabled={pristine || submitting} onClick={reset}>
+                            Clear Values
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
     )
 }
 
-export default reduxForm({
+const mapStateToProps = (state: any) => {
+    return {
+        formValues: getFormValues("consent")(state)
+    };
+};
+
+const withForm = reduxForm({
     form: 'customer'
 })(Cart);
+
+export default connect(mapStateToProps)(withForm);
 
 
 
