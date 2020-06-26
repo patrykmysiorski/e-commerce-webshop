@@ -1,8 +1,4 @@
-import {
-    ProductsState,
-    ProductActionTypes,
-    ADD_PRODUCT,
-} from '../types/productsTypes'
+import { ADD_PRODUCT, DELETE_PRODUCT, ProductActionTypes, ProductsState, } from '../types/productsTypes'
 
 const initialState: ProductsState = {
     products: []
@@ -14,15 +10,16 @@ const productsReducer = (
 ): ProductsState => {
     switch (action.type) {
         case ADD_PRODUCT:
-            return {
-                products: [...state.products, action.payload]
+            const names = state.products.map(game => game.title);
+            if (!names.includes(action.payload.title)) {
+                return {
+                    products: [...state.products, {id: state.products.length, ...action.payload}]
+                }
             }
-        // case DELETE_FROM_CART:
-        //     return {
-        //         cart: state.messages.filter(
-        //             // TODO
-        //         )
-        //     }
+        case DELETE_PRODUCT:
+            return {
+                products: state.products.filter(product => product.id !== action.payload)
+            }
         default:
             return state
     }
