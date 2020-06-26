@@ -1,42 +1,39 @@
 import React from 'react'
-import { ListGroup } from 'react-bootstrap';
-import '../index.css'
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../actions/cartActions";
-import { Item } from "../types/cartTypes";
 import { Product } from "../types/productsTypes";
+import '../css/products.css'
+import '../css/app.css'
 
 const Products: React.FC = () => {
     const games: Product[] = useSelector((state: any) => state.productsReducer.products)
+    // const aLotOfGames: Product[] = games.concat(...games).concat(...games).concat(...games).concat(...games).concat(...games);
     const dispatch = useDispatch()
 
-    const onButtonClick = (item: Item) => {
-        dispatch(addToCart({
-            name: item.name,
-            price: item.price
-        }))
+    const onButtonClick = (item: Product) => {
+        dispatch(addToCart(item));
     }
 
     return (
-        <div className="center">
-            {games.map(listItem => {
-                const item: Item = {
-                    name: listItem.title,
-                    price: listItem.price
+        <div className={'flex-container-products'}>
+            {games.map(game => {
+                    return (
+                        <div className={'game'}>
+                            <p>{game.title}</p>
+                            <p>{game.category}</p>
+                            <p>Price: {game.price}</p>
+                            <br />
+                            <img src={game.thumbnail} width={'100px'} height={'100px'} alt={game.title} />
+                            <br />
+                            <br />
+                            <button className={'button'} type="button" onClick={() => onButtonClick(game)}>Add to
+                                cart
+                            </button>
+                            <div className="break"></div>
+                        </div>
+                    )
                 }
-                return (<ListGroup horizontal key={listItem.id}>
-                    <ListGroup.Item variant={'primary'}>{listItem.title}</ListGroup.Item>
-                    <ListGroup.Item variant={'primary'}>{listItem.category}</ListGroup.Item>
-                    <ListGroup.Item variant={'primary'}>{listItem.price} EUR</ListGroup.Item>
-                    <ListGroup.Item variant={'primary'}><img src={listItem.thumbnail} width="100px"
-                                                             height="100px" alt={listItem.title}/></ListGroup.Item>
-                    <ListGroup.Item variant={'primary'}>
-                        <button type="button" className="btn btn-primary" onClick={() => onButtonClick(item)}>Add to
-                            cart
-                        </button>
-                    </ListGroup.Item>
-                </ListGroup>)
-            })}
+            )}
         </div>
     )
 }
