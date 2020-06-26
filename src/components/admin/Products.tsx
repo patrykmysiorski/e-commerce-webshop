@@ -17,17 +17,31 @@ const Products: React.FC = (props: any) => {
     }
 
     return (
-        <div className="center">
-            <button onClick={onAddButtonClicked}>Add product</button>
-            {addClicked && (
-                <AddProductForm/>
-            )}
-            {products.map(listItem =>
-                <div key={listItem.id}>
-                    <div>{listItem.title}</div>
-                    <button onClick={() => onDelete(listItem.id)}>delete</button>
-                </div>
-            )}
+        <div className={'flex-container-page-column'}>
+            <table className={'cart'}>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>TITLE</th>
+                    <th>CATEGORY</th>
+                    <th>PRICE</th>
+                </tr>
+                </thead>
+                <tbody>
+                {products.map((product: Product) => {
+                    return (
+                        <tr key={product.id}>
+                            <td>{product.id}</td>
+                            <td>{product.title}</td>
+                            <td>{product.category}</td>
+                            <td>{product.price} EUR</td>
+                            <td><button className={'delete-button'} onClick={() => onDelete(product.id)}>DELETE</button></td>
+                        </tr>
+                    )
+                })}
+                </tbody>
+            </table>
+            <AddProductForm />
         </div>
     )
 }
