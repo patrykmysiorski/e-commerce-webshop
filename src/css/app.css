@@ -1,0 +1,53 @@
+.main-page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../images/background.jpg");
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+}
+
+.m-b-15 {
+    margin-bottom: 15px;
+}
+
+/* ----- BUTTONS ----- */
+.btn:link,
+.btn:visited {
+    display: inline-block;
+    padding: 10px 30px;
+    font-weight: 300;
+    text-decoration: none;
+    border-radius: 200px;
+    transition: background-color 0.2s, border 0.2s, color 0.2s;
+}
+
+.btn-full:link,
+.btn-full:visited {
+    background-color: #0088a9;
+    border: 1px solid #0088a9;
+    color: whitesmoke;
+    margin-right: 15px;
+}
+
+.btn-ghost:link,
+.btn-ghost:visited {
+    border: 1px solid #0088a9;
+    color: #0088a9;
+}
+
+.btn:hover,
+.btn:active {
+    background-color: rgba(0, 136, 169, 0.8);
+}
+
+.btn-full:hover,
+.btn-full:active {
+    border: 1px solid rgba(0, 136, 169, 0.8);
+}
+
+.btn-ghost:hover,
+.btn-ghost:active {
+    border: 1px solid rgba(0, 136, 169, 0.8);
+    color: whitesmoke;
+}
