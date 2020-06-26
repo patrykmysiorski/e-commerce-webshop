@@ -3,10 +3,10 @@ export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 
 export interface Product {
     id: number,
-    name: string,
+    title: string,
     category: string,
     price: number,
-    image: string
+    thumbnail: string
 }
 
 interface addProductAction {
@@ -16,7 +16,7 @@ interface addProductAction {
 
 interface deleteProductAction {
     type: typeof DELETE_PRODUCT
-    payload: string
+    payload: number
 }
 
 export interface ProductsState {
