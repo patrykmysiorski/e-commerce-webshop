@@ -17,3 +17,23 @@ html, body {
   color: white;
 }
 
+.flex-container-page {
+  color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 30px auto;
+}
+
+.flex-container-page-column {
+  color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 30px auto;
+  flex-direction: column;
+}

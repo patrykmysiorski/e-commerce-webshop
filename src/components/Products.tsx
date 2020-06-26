@@ -15,7 +15,7 @@ const Products: React.FC = () => {
     }
 
     return (
-        <div className={'flex-container-products'}>
+        <div className={'flex-container-page'}>
             {games.map(game => {
                     return (
                         <div className={'game'}>
@@ -29,7 +29,6 @@ const Products: React.FC = () => {
                             <button className={'button'} type="button" onClick={() => onButtonClick(game)}>Add to
                                 cart
                             </button>
-                            <div className="break"></div>
                         </div>
                     )
                 }
