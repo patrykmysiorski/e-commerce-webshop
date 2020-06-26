@@ -5,10 +5,12 @@ import { ROUTING } from '../constants/routing'
 import '../css/routingList.css'
 import axios from "axios";
 import { addProduct } from "../actions/productActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Product } from "../types/productsTypes";
 
 const RoutingList = () => {
     const dispatch = useDispatch();
+    const cartContent: Product[] = useSelector((state: any) => state.cartReducer.cart)
     useEffect(() => {
         axios.get(`https://raw.githubusercontent.com/patrykmysiorski/e-commerce-webshop/master/jsons/games.json`)
             .then(res => {
@@ -23,14 +25,17 @@ const RoutingList = () => {
         <Router>
             <div className={"content"}>
                 <header>
-                    <h4 className={'logo'}>E-commerce webshop</h4>
+                    <h4 className={'logo'}>E-commerce web shop</h4>
                     <nav>
                         <ul className={'nav-links'}>
                             {ROUTING.map(routeItem => (
                                 <li key={routeItem.linkTo}>
-                                    <Link to={routeItem.linkTo}>
-                                        {routeItem.buttonName}
-                                    </Link>
+                                    {routeItem.buttonName === 'Your Cart' ? <Link to={routeItem.linkTo}>
+                                            {routeItem.buttonName}{' '}{cartContent.length}
+                                        </Link> :
+                                        <Link to={routeItem.linkTo}>
+                                            {routeItem.buttonName}
+                                        </Link>}
                                 </li>
                             ))}
                         </ul>
