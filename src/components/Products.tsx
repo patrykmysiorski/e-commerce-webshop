@@ -18,10 +18,10 @@ const Products: React.FC = () => {
         <div className={'flex-container-page'}>
             {games.map(game => {
                     return (
-                        <div className={'game'}>
+                        <div className={'game'} key={game.id}>
                             <p>{game.title}</p>
                             <p>{game.category}</p>
-                            <p>Price: {game.price}</p>
+                            <p>Price: {game.price} EUR</p>
                             <br />
                             <img src={game.thumbnail} width={'100px'} height={'100px'} alt={game.title} />
                             <br />
