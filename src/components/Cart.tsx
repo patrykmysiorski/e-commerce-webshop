@@ -1,8 +1,10 @@
 import React from 'react';
-import { useSelector } from "react-redux";
-import { Field, reduxForm } from 'redux-form'
+import { useSelector, connect } from "react-redux";
+import { Field, getFormValues, reduxForm } from 'redux-form'
 import '../css/cart.css'
 import { Product } from "../types/productsTypes";
+import renderField from "./renderField";
+import { required, email, length } from 'redux-form-validators'
 
 const Cart: React.FC = (props: any) => {
     const products: Product[] = useSelector((state: any) => state.cartReducer.cart)
@@ -15,26 +17,40 @@ const Cart: React.FC = (props: any) => {
 
     return (
         <div className="flex-container-page-column">
-            {products.map((product: Product) => {
-                cartValue = product.price + cartValue;
-                return (
-                    <div key={product.id}>
-                        {product.title}{' '}
-                        {product.price}
-                    </div>
-                )
-            })}
-            <div>Cart value: {cartValue}</div>
+            {products.length > 0 ? <>
+                <table className={'cart'}>
+                    <thead>
+                    <tr>
+                        <th>TITLE</th>
+                        <th>PRICE</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {products.map((product: Product) => {
+                        cartValue = product.price + cartValue;
+                        return (
+                            <tr key={product.id}>
+                                <td>{product.title}</td>
+                                <td>{product.price} EUR</td>
+                            </tr>
+                        )
+                    })}
+                    </tbody>
+                </table>
+                <div>Total price: {cartValue} EUR</div>
+            </> : <h2>Your cart is empty! :(</h2>}
+
             <div className={'form'}>
-                <form onSubmit={handleSubmit}>
+                <form action={'http://www.jakubadamus.cba.pl/paypal.php'} method={'get'}>
                     <div>
                         <label>First Name</label>
                         <div>
                             <Field
                                 name="firstName"
-                                component="input"
+                                component={renderField}
                                 type="text"
                                 placeholder="First Name"
+                                validate={length({ min: 3 })}
                             />
                         </div>
                     </div>
@@ -44,9 +60,10 @@ const Cart: React.FC = (props: any) => {
 
                             <Field
                                 name="lastName"
-                                component="input"
+                                component={renderField}
                                 type="text"
                                 placeholder="Last Name"
+                                validate={length({ min: 3 })}
                             />
                         </div>
                     </div>
@@ -55,9 +72,10 @@ const Cart: React.FC = (props: any) => {
                         <div>
                             <Field
                                 name="email"
-                                component="input"
+                                component={renderField}
                                 type="email"
                                 placeholder="Email"
+                                validate={[required(), email()]}
                             />
                         </div>
                     </div>
@@ -66,7 +84,7 @@ const Cart: React.FC = (props: any) => {
                         <div>
                             <Field
                                 name="phone"
-                                component="input"
+                                component={renderField}
                                 type="text"
                                 placeholder="Phone number"
                             />
@@ -78,7 +96,7 @@ const Cart: React.FC = (props: any) => {
                             <Field
                                 name="consent"
                                 id="consent"
-                                component="input"
+                                component={renderField}
                                 type="checkbox"
                             />
                         </div>
@@ -90,35 +108,30 @@ const Cart: React.FC = (props: any) => {
                         </div>
                     </div>
                     <div>
-                        <button type="submit" disabled={pristine || submitting}>
+                        <button className={'button'} type="submit" disabled={ props.consent || pristine || submitting}>
                             Submit
                         </button>
-                        <button type="button" disabled={pristine || submitting} onClick={reset}>
+                        <button className={'button'} type="button" disabled={pristine || submitting} onClick={reset}>
                             Clear Values
                         </button>
                     </div>
                 </form>
-                <>
-                    {/*<form action={'http://www.jakubadamus.cba.pl/paypal.php'} method={'get'}>*/}
-                    {/*    <input type={'text'} name={'firstName'} id={''} placeholder={'Name'}/>*/}
-                    {/*    <input type={'text'} name={'lastName'} id={''} placeholder={'Surname'}/>*/}
-                    {/*    <input type={'text'} name={'email'} id={''} placeholder={'example@example.com'}/>*/}
-                    {/*    <input type={'text'} name={'phone'} id={''} placeholder={'telephone'}/>*/}
-                    {/*    <input type={'checkbox'} name={'agreement'} id={''}/>*/}
-
-                    {/*    <input type={'hidden'} name={'products[]'} value={testObject}/>*/}
-                    {/*    <button type={'submit'}/>*/}
-                    {/*</form>*/}
-                    {/*const testObject: any = {"id": 245, "title": "fifa", "price": 20, "category": "game", "thumbnail": "https://wp.pl"};*/}
-                </>
             </div>
         </div>
     )
 }
 
-export default reduxForm({
+const mapStateToProps = (state: any) => {
+    return {
+        formValues: getFormValues("consent")(state)
+    };
+};
+
+const withForm = reduxForm({
     form: 'customer'
 })(Cart);
+
+export default connect(mapStateToProps)(withForm);
 
 
 
