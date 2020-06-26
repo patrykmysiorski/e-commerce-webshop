@@ -17,9 +17,10 @@ const RoutingList = () => {
                 const games = res.data.games;
                 games.map((game: any, i: number) => {
                     const gameWithId = {id: i, ...game}
-                    dispatch(addProduct(gameWithId));
+                    return dispatch(addProduct(gameWithId));
                 })
             })
+        // eslint-disable-next-line
     }, []);
     return (
         <Router>
