@@ -15,6 +15,8 @@ const productsReducer = (
                 return {
                     products: [...state.products, {id: state.products.length, ...action.payload}]
                 }
+            } else {
+                return state;
             }
         case DELETE_PRODUCT:
             return {
